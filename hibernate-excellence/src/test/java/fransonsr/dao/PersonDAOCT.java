@@ -85,4 +85,17 @@ public class PersonDAOCT {
 
         assertThat(person, is(equalTo(expected)));
     }
+
+    @Test
+    public void testUpdate() throws Exception {
+        afterTxAction = new Runnable() {
+            public void run() {
+                dbUnitUtils.validateTable("person.update.dbunit.xml", "PERSON");
+            }
+        };
+
+        Person person = test.read(1L);
+
+        person.setEmail("mickey.mouse@disney.com");
+    }
 }

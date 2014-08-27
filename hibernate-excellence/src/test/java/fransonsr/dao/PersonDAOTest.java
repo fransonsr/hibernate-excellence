@@ -44,7 +44,6 @@ public class PersonDAOTest {
 
     @Test
     public void testRead() throws Exception {
-
         Long id = 1L;
 
         when(entityManager.find(Person.class, id)).thenReturn(person);
@@ -53,4 +52,6 @@ public class PersonDAOTest {
 
         assertThat(person, is(notNullValue()));
     }
+
+    // Nothing to test for update.
 }
