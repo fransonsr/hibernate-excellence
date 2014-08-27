@@ -54,4 +54,12 @@ public class PersonDAOTest {
     }
 
     // Nothing to test for update.
+
+    @Test
+    public void testDelete() throws Exception {
+
+        test.delete(person);
+
+        verify(entityManager).remove(person);
+    }
 }

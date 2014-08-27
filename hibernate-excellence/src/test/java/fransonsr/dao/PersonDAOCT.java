@@ -98,4 +98,16 @@ public class PersonDAOCT {
 
         person.setEmail("mickey.mouse@disney.com");
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        afterTxAction = new Runnable() {
+            public void run() {
+                dbUnitUtils.validateTable("person.delete.dbunit.xml", "PERSON");
+            }
+        };
+
+        Person person = test.read(1L);
+        test.delete(person);
+    }
 }

@@ -28,4 +28,8 @@ public class PersonDAO {
     public Person read(Long id) {
         return entityManager.find(Person.class, id);
     }
+
+    public void delete(Person person) {
+        entityManager.remove(person);
+    }
 }
