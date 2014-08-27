@@ -41,4 +41,16 @@ public class PersonDAOTest {
 
         verify(entityManager).persist(person);
     }
+
+    @Test
+    public void testRead() throws Exception {
+
+        Long id = 1L;
+
+        when(entityManager.find(Person.class, id)).thenReturn(person);
+
+        Person person = test.read(id);
+
+        assertThat(person, is(notNullValue()));
+    }
 }

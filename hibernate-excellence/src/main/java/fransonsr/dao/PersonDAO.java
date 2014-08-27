@@ -23,6 +23,9 @@ public class PersonDAO {
 
     public void create(Person person) {
         entityManager.persist(person);
-        entityManager.flush();
+    }
+
+    public Person read(Long id) {
+        return entityManager.find(Person.class, id);
     }
 }

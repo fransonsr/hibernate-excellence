@@ -1,10 +1,9 @@
 package fransonsr.dao;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,9 +69,20 @@ public class PersonDAOCT {
         person.setFirstName("First");
         person.setLastName("Last");
         person.setEmail("person@somewhere.com");
-        person.setId(1L);
+
+        person.setId(3L);   // NOTE: since no ID generator is defined, it is assigned.
 
         test.create(person);
     }
 
+    @Test
+    public void testRead() throws Exception {
+        Person person = test.read(1L);
+
+        Person expected = new Person();
+        expected.setFirstName("Mickey");
+        expected.setLastName("Mouse");
+
+        assertThat(person, is(equalTo(expected)));
+    }
 }

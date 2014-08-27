@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 
-  <PERSON firstName='First' lastName='Last' email='person@somewhere.com'/>
+  <PERSON firstName='Mickey' lastName='Mouse' email='mickey@disney.com' />
+  <PERSON firstName='First' lastName='Last' email='person@somewhere.com' />
 
 </dataset>
