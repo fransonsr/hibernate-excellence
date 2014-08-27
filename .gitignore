@@ -1,0 +1,17 @@
+# Maven
+target/
+overlays/
+
+# Eclipse
+.workspace
+.settings/
+.project
+.classpath
+.springBeans
+.metadata/
+Servers/
+
+
+# IntelliJ
+*.iml
+.idea/
