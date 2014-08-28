@@ -1,8 +1,8 @@
 package fransonsr.dao;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -109,5 +109,13 @@ public class PersonDAOCT {
 
         Person person = test.read(1L);
         test.delete(person);
+    }
+
+    @Test
+    public void testReference() throws Exception {
+        Person person = test.reference(1L);
+
+        assertThat(person.getClass().getCanonicalName(), is(not(Person.class.getCanonicalName())));
+        assertThat(person, is(instanceOf(Person.class)));
     }
 }

@@ -48,9 +48,9 @@ public class PersonDAOTest {
 
         when(entityManager.find(Person.class, id)).thenReturn(person);
 
-        Person person = test.read(id);
+        Person actual = test.read(id);
 
-        assertThat(person, is(notNullValue()));
+        assertThat(actual, is(notNullValue()));
     }
 
     // Nothing to test for update.
@@ -61,5 +61,16 @@ public class PersonDAOTest {
         test.delete(person);
 
         verify(entityManager).remove(person);
+    }
+
+    @Test
+    public void testReference() throws Exception {
+        Long id = 1L;
+
+        when(entityManager.getReference(Person.class, id)).thenReturn(person);
+
+        Person actual = test.reference(id);
+
+        assertThat(actual, is(notNullValue()));
     }
 }

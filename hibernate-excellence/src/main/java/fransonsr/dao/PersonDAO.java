@@ -32,4 +32,8 @@ public class PersonDAO {
     public void delete(Person person) {
         entityManager.remove(person);
     }
+
+    public Person reference(Long id) {
+        return entityManager.getReference(Person.class, id);
+    }
 }
