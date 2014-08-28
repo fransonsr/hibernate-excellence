@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,9 @@ public class PersonDAOTest {
     @Mock
     EntityManager entityManager;
 
+    @Mock
+    Query query;
+
     @InjectMocks
     PersonDAO test;
 
@@ -32,6 +36,8 @@ public class PersonDAOTest {
         person.setFirstName("First");
         person.setLastName("Last");
         person.setEmail("user@somewhere.com");
+
+        when(entityManager.createNamedQuery("personDeleteById")).thenReturn(query);
     }
 
     @Test
@@ -61,6 +67,19 @@ public class PersonDAOTest {
         test.delete(person);
 
         verify(entityManager).remove(person);
+    }
+
+    @Test
+    public void testDelete_long() throws Exception {
+
+        Long id = 1L;
+
+        when(query.setParameter("id", id)).thenReturn(query);
+        when(query.executeUpdate()).thenReturn(1);
+
+        test.delete(id);
+
+        verify(entityManager).createNamedQuery("personDeleteById");
     }
 
     @Test

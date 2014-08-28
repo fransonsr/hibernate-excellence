@@ -2,8 +2,14 @@ package fransonsr.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "personDeleteById",
+                query = "delete from Person where id = :id")
+})
 public class Person {
 
     @Id

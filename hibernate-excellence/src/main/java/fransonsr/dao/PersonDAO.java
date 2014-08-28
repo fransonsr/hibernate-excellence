@@ -2,6 +2,7 @@ package fransonsr.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -33,7 +34,14 @@ public class PersonDAO {
         entityManager.remove(person);
     }
 
+    public void delete(Long id) {
+        Query query = entityManager.createNamedQuery("personDeleteById");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
     public Person reference(Long id) {
         return entityManager.getReference(Person.class, id);
     }
+
 }

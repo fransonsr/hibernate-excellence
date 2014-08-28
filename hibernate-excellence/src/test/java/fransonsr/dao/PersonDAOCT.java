@@ -33,7 +33,7 @@ public class PersonDAOCT {
     DBUnitUtils dbUnitUtils;
 
     @Autowired
-    PersonDAO test;
+    PersonDAO dao;
 
     private Runnable afterTxAction;
 
@@ -72,12 +72,12 @@ public class PersonDAOCT {
 
         person.setId(3L);   // NOTE: since no ID generator is defined, it is assigned.
 
-        test.create(person);
+        dao.create(person);
     }
 
     @Test
     public void testRead() throws Exception {
-        Person person = test.read(1L);
+        Person person = dao.read(1L);
 
         Person expected = new Person();
         expected.setFirstName("Mickey");
@@ -94,7 +94,7 @@ public class PersonDAOCT {
             }
         };
 
-        Person person = test.read(1L);
+        Person person = dao.read(1L);
 
         person.setEmail("mickey.mouse@disney.com");
     }
@@ -107,13 +107,24 @@ public class PersonDAOCT {
             }
         };
 
-        Person person = test.read(1L);
-        test.delete(person);
+        Person person = dao.read(1L);
+        dao.delete(person);
+    }
+
+    @Test
+    public void testDelete_long() throws Exception {
+        afterTxAction = new Runnable() {
+            public void run() {
+                dbUnitUtils.validateTable("person.delete.dbunit.xml", "PERSON");
+            }
+        };
+
+        dao.delete(1L);
     }
 
     @Test
     public void testReference() throws Exception {
-        Person person = test.reference(1L);
+        Person person = dao.reference(1L);
 
         assertThat(person.getClass().getCanonicalName(), is(not(Person.class.getCanonicalName())));
         assertThat(person, is(instanceOf(Person.class)));
