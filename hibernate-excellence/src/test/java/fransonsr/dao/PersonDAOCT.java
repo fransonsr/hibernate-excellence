@@ -77,8 +77,6 @@ public class PersonDAOCT {
         person.setLastName("Last");
         person.setEmail("person@somewhere.com");
 
-        person.setId(3L);   // NOTE: since no ID generator is defined, it is assigned.
-
         dao.create(person);
     }
 
