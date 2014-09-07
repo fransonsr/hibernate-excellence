@@ -6,14 +6,13 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-import javax.validation.ConstraintViolationException;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -96,7 +95,7 @@ public class PersonDAOCT {
         person.setLastName("Last");
         person.setEmail("person@somewhere.com");
 
-        thrown.expect(ConstraintViolationException.class);
+        thrown.expect(DataIntegrityViolationException.class);
 
         dao.create(person);
 
@@ -111,7 +110,7 @@ public class PersonDAOCT {
         person.setLastName("Last");
         person.setEmail("person@somewhere.com");
 
-        thrown.expect(ConstraintViolationException.class);
+        thrown.expect(DataIntegrityViolationException.class);
 
         dao.create(person);
 

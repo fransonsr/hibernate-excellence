@@ -6,9 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
@@ -32,9 +29,7 @@ public class Person {
         this.id = id;
     }
 
-    @NotNull
-    @Length(max = 100)
-//    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     public String getFirstName() {
         return firstName;
     }
