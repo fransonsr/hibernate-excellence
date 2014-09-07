@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries({
@@ -12,13 +13,12 @@ import javax.persistence.NamedQuery;
 })
 public class Person {
 
-    @Id
     private Long id;
-
     private String firstName;
     private String lastName;
     private String email;
 
+    @Id
     public Long getId() {
         return id;
     }
@@ -27,6 +27,7 @@ public class Person {
         this.id = id;
     }
 
+    @NotNull
     public String getFirstName() {
         return firstName;
     }

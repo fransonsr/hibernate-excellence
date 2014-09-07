@@ -7,6 +7,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -71,4 +72,8 @@ public class PersistenceCTConfiguration {
         return new JpaTransactionManager();
     }
 
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 }

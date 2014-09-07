@@ -44,4 +44,8 @@ public class PersonDAO {
         return entityManager.getReference(Person.class, id);
     }
 
+    public void flush() {
+        entityManager.flush();
+    }
+
 }
