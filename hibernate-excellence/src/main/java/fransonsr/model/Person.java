@@ -1,6 +1,5 @@
 package fransonsr.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,7 +33,6 @@ public class Person {
 
     @NotNull
     @Length(max = 100)
-//    @Column(nullable = false, length = 100)
     public String getFirstName() {
         return firstName;
     }
@@ -43,6 +41,8 @@ public class Person {
         this.firstName = firstName;
     }
 
+    @NotNull
+    @Length(max = 100)
     public String getLastName() {
         return lastName;
     }
@@ -51,6 +51,8 @@ public class Person {
         this.lastName = lastName;
     }
 
+    @NotNull
+    @Length(max = 100)
     public String getEmail() {
         return email;
     }
