@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.AfterTransaction;
@@ -78,6 +79,20 @@ public class PersonDAOCT {
         person.setEmail("person@somewhere.com");
 
         dao.create(person);
+    }
+
+    @Test
+    public void testCreate_fail_nullFirstName() throws Exception {
+        Person person = new Person();
+        person.setFirstName(null);
+        person.setLastName("Last");
+        person.setEmail("person@somewhere.com");
+
+        thrown.expect(DataIntegrityViolationException.class);
+
+        dao.create(person);
+
+        dao.flush();    // force the constraint violation
     }
 
     @Test

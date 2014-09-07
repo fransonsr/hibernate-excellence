@@ -1,5 +1,6 @@
 package fransonsr.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,6 +30,7 @@ public class Person {
         this.id = id;
     }
 
+    @Column(nullable = false, length = 100)
     public String getFirstName() {
         return firstName;
     }
