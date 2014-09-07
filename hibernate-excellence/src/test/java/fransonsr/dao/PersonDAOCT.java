@@ -6,8 +6,6 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-import javax.validation.ConstraintViolationException;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,7 +25,7 @@ import fransonsr.PersistenceCTConfiguration;
 import fransonsr.model.Person;
 
 @ContextConfiguration(classes = {PersistenceCTConfiguration.class})
-@TransactionConfiguration
+@TransactionConfiguration(defaultRollback = false)
 @EnableTransactionManagement
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
@@ -82,22 +80,6 @@ public class PersonDAOCT {
         person.setId(3L);   // NOTE: since no ID generator is defined, it is assigned.
 
         dao.create(person);
-    }
-
-    @Test
-    public void testCreate_fail_nullFirstName() {
-        Person person = new Person();
-        person.setFirstName(null);
-        person.setLastName("Last");
-        person.setEmail("person@somewhere.com");
-
-        person.setId(3L);   // NOTE: since no ID generator is defined, it is assigned.
-
-        thrown.expect(ConstraintViolationException.class);
-
-        dao.create(person);
-
-        dao.flush();
     }
 
     @Test
