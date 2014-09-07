@@ -14,14 +14,13 @@ import javax.persistence.NamedQuery;
 })
 public class Person {
 
-    @Id
-    @GeneratedValue
     private Long id;
-
     private String firstName;
     private String lastName;
     private String email;
 
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

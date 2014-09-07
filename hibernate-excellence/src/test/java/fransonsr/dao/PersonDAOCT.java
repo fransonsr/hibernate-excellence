@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.AfterTransaction;
@@ -33,6 +34,11 @@ import fransonsr.model.Person;
 public class PersonDAOCT {
 
     private static final String datasetFile = "person.dbunit.xml";
+
+    private static final String STRING_10 = "01234456789";
+    private static final String STRING_20 = STRING_10 + STRING_10;
+    private static final String STRING_100 = STRING_20 + STRING_20 + STRING_20 + STRING_20 + STRING_20;
+    private static final String STRING_110 = STRING_100 + STRING_10;
 
     @Autowired
     DBUnitUtils dbUnitUtils;
@@ -82,6 +88,7 @@ public class PersonDAOCT {
     }
 
     @Test
+    @Rollback(true)
     public void testCreate_fail_nullFirstName() throws Exception {
         Person person = new Person();
         person.setFirstName(null);
@@ -94,6 +101,23 @@ public class PersonDAOCT {
 
         dao.flush();    // force the constraint violation
     }
+
+    @Test
+    @Rollback(true)
+    public void testCreate_fail_firstNameTooLong() throws Exception {
+        Person person = new Person();
+        person.setFirstName(STRING_110);
+        person.setLastName("Last");
+        person.setEmail("person@somewhere.com");
+
+        thrown.expect(DataIntegrityViolationException.class);
+
+        dao.create(person);
+
+        dao.flush();    // force the constraint violation
+    }
+
+
 
     @Test
     public void testRead() throws Exception {
