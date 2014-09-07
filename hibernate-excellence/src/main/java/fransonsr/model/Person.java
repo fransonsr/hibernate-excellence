@@ -1,5 +1,6 @@
 package fransonsr.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
+    private Address address;
 
     @Id
     @GeneratedValue
@@ -59,6 +61,15 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Embedded
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 
-  <PERSON firstName='Mickey' lastName='Mouse' email='mickey@disney.com' />
-  <PERSON firstName='First' lastName='Last' email='person@somewhere.com' />
+  <PERSON firstName='Mickey' lastName='Mouse' email='mickey@disney.com' street='24 Main Street USA' city='Disneyland' state='CA' zip='1234' />
+  <PERSON firstName='First' lastName='Last' email='person@somewhere.com' street='1235 N State' city='Provo' state='UT' zip='84606' />
 
 </dataset>

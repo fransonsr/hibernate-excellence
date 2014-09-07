@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fransonsr.DBUnitUtils;
 import fransonsr.PersistenceCTConfiguration;
+import fransonsr.model.Address;
 import fransonsr.model.Person;
 
 @ContextConfiguration(classes = {PersistenceCTConfiguration.class})
@@ -84,6 +85,14 @@ public class PersonDAOCT {
         person.setFirstName("First");
         person.setLastName("Last");
         person.setEmail("person@somewhere.com");
+
+        Address address = new Address();
+        address.setStreet("1235 N State");
+        address.setCity("Provo");
+        address.setState("UT");
+        address.setZip("84606");
+
+        person.setAddress(address);
 
         dao.create(person);
     }
