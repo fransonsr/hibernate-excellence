@@ -1,10 +1,13 @@
 package fransonsr.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -15,7 +18,7 @@ public class Address {
     private String state;
     private String zip;
 
-    private Person person;
+    private Set<Person> persons = new HashSet<Person>();
 
     @Id
     @GeneratedValue
@@ -28,13 +31,13 @@ public class Address {
         this.id = id;
     }
 
-    @OneToOne(mappedBy = "address")
-    public Person getPerson() {
-        return person;
+    @OneToMany(mappedBy = "address")
+    public Set<Person> getPersons() {
+        return persons;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
     }
 
     public String getStreet() {

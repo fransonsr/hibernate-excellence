@@ -93,7 +93,7 @@ public class PersonDAOCT {
         address.setZip("84606");
 
         person.setAddress(address); // NOTE: by direction mapping
-        address.setPerson(person);
+        address.getPersons().add(person);
 
         dao.create(person);
     }
