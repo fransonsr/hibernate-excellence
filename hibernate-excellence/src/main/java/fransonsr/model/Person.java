@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -15,8 +16,8 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "personDeleteById",
-                query = "delete from Person where id = :id")
+       @NamedQuery(name = "personDeleteById",
+                   query = "delete from Person where id = :id")
 })
 public class Person {
 
@@ -67,8 +68,12 @@ public class Person {
         this.email = email;
     }
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "address_id")
+    @OneToOne(cascade = { CascadeType.ALL })
+    @JoinTable(
+           name = "person_address",
+           joinColumns = {@JoinColumn(name = "person_id")},
+           inverseJoinColumns = {@JoinColumn(name = "address_id")}
+    )
     public Address getAddress() {
         return address;
     }
