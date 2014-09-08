@@ -1,11 +1,14 @@
 package fransonsr.model;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -25,6 +28,7 @@ public class Person {
 
     @Id
     @GeneratedValue
+    @Column(name = "person_id")
     public Long getId() {
         return id;
     }
@@ -63,7 +67,8 @@ public class Person {
         this.email = email;
     }
 
-    @Embedded
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "address_id")
     public Address getAddress() {
         return address;
     }
