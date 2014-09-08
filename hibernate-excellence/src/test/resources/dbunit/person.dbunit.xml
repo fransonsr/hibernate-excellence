@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 
-  <PERSON id='1' firstName='Mickey' lastName='Mouse' email='mickey@disney.com' street='24 Main Street USA' city='Disneyland' state='CA' zip='1234' />
+  <ADDRESS address_id='1' street='24 Main Street USA' city='Disneyland' state='CA' zip='1234' />
+
+  <PERSON person_id='1' firstName='Mickey' lastName='Mouse' email='mickey@disney.com' address_id='1' />
 
 </dataset>

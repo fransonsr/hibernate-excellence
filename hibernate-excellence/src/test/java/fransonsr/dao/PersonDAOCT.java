@@ -92,7 +92,8 @@ public class PersonDAOCT {
         address.setState("UT");
         address.setZip("84606");
 
-        person.setAddress(address);
+        person.setAddress(address); // NOTE: by direction mapping
+        address.setPerson(person);
 
         dao.create(person);
     }

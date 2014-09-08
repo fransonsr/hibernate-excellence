@@ -1,11 +1,41 @@
 package fransonsr.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Address {
 
+    private Long id;
     private String street;
     private String city;
     private String state;
     private String zip;
+
+    private Person person;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "address_id")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @OneToOne(mappedBy = "address")
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public String getStreet() {
         return street;
