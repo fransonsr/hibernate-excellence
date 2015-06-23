@@ -1,6 +1,5 @@
 package fransonsr.model;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -63,7 +62,6 @@ public class Person {
         this.email = email;
     }
 
-    @Embedded
     public Address getAddress() {
         return address;
     }
