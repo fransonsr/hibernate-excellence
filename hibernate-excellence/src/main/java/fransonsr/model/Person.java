@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.TableGenerator;
 
 @Entity
 @NamedQueries({
@@ -15,7 +16,16 @@ import javax.persistence.NamedQuery;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "personGenerator")
+    @TableGenerator(
+    		name = "personGenerator",
+    		table = "ID_TABLE",
+    		pkColumnName = "GEN_KEY",
+    		valueColumnName = "GEN_VALUE",
+    		pkColumnValue = "PERSON_ID",
+    		allocationSize = 1,
+    		initialValue = 50
+	)
     private Long id;
 
     private String firstName;

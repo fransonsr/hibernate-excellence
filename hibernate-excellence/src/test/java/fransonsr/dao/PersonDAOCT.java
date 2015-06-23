@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -62,6 +63,15 @@ public class PersonDAOCT {
     @Before
     public void setup() throws Exception {
         afterTxAction = null;
+    }
+
+    @BeforeClass
+    public static void classSetup() throws Exception {
+    	// NOTE: by default, Hibernate uses an older generator mapping that will
+    	// generate an id starting at '1' and the "initialValue" setting determines
+    	// the value AFTER the id is generated. The new mapping uses "initialValue"
+    	// as expected: the initial id generated will be the "initailValue" value.
+    	System.setProperty("hibernate.id.new_generator_mappings", "true");
     }
 
     @Test
